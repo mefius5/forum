@@ -10,3 +10,5 @@ define('APPROOT', dirname(dirname(__FILE__)));
 define('URLROOT', 'http://localhost/FORUM');
 //Site Name
 define('SITENAME', 'FORUM');
+//App version
+define('APPVERSION', '1.0.0');
