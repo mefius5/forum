@@ -5,6 +5,11 @@
         }
         
         public function index(){
+            if(isLoggedIn()){
+                redirect('posts');
+            }
+            
+            
             $data = [
                 'title' => 'FORUM',
                 'description' => 'Simple share posts application'

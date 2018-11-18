@@ -58,6 +58,13 @@
                 if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
                     //Validated
                     
+                    //Check and set logged in user
+                    $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+                    
+                    if(loggedInUser){
+                        
+                    }
+                    
                     // Hash Password
                     $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
                     
@@ -134,7 +141,7 @@
                     if($loggedInUser){
                         //Create Session
                         $this->createUserSession($loggedInUser);
-                        die('SUCCESS');
+                        
                     }else{
                         $data['password_err'] = 'Password incorrect';
                         
@@ -165,7 +172,7 @@
             $_SESSION['user_id'] = $user->id;
             $_SESSION['user_email'] = $user->email;
             $_SESSION['user_name'] = $user->name;
-            redirect('pages/index');
+            redirect('posts');
         }
         
         public function logout(){
@@ -174,6 +181,13 @@
             unset($_SESSION['user_name']);
             session_destroy();
             redirect('users/login');
-            
         }
+        public function isLoggedIn(){
+            if(isset($_SESSION['user_id'])){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        
     }
